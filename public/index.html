@@ -38,7 +38,7 @@
     // Detect if running on localhost or hosted on Netlify
             let baseURL = window.location.hostname.includes("localhost") 
                 ? "http://localhost:3000/search" 
-                : "https://genius-lyrics.netlify.app/public/search";
+                : "https://genius-lyrics.netlify.app/search";
 
             $.get(`${baseURL}?q=${song}`, function(response) {
                 if (response.response.hits.length > 0) {
