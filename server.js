@@ -26,7 +26,7 @@ app.get("/search", async (req, res) => {
         //console.log(response.data)
     } catch (error) {
         console.error("Error fetching Genius API data:", error);
-        res.status(500).json({ error: "Error fetching data" });
+        res.status(500).json({ error: "Error fetching lyric data" });
     }
 });
 
