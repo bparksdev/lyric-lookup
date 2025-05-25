@@ -57,42 +57,6 @@
             });
         }
 
-            let song = $("#songInput").val();
-            let artist = $("#artistInput").val();
-            if (!song || !artist) {
-                $("#results").html("<p class='text-danger'>Please enter both a song name and an artist.</p>");
-                return;
-            }
-            
-    // Detect if running on localhost or hosted on Netlify
-            let baseURL = window.location.hostname.includes("localhost") 
-                ? "http://localhost:3000/search" 
-                : "https://genius-lyrics.netlify.app/search";
-
-            $.get(`${baseURL}?q=${song}`, function(response) {
-                if (response.response.hits.length > 0) {
-                    let filteredResult = response.response.hits.find(hit => 
-                        hit.result.primary_artist.name.toLowerCase() === artist.toLowerCase()
-                    );
-
-                    if (filteredResult) {
-                        $("#results").html(`
-                            <div class="card p-3">
-                                <h2>${filteredResult.result.full_title}</h2>
-                                <p><strong>Artist:</strong> ${filteredResult.result.primary_artist.name}</p>
-                                <p><a href="${filteredResult.result.url}" class="btn btn-success" target="_blank">View on Genius</a></p>
-                            </div>
-                        `);
-                    } else {
-                        $("#results").html("<p class='text-danger'>No matching song found for the specified artist.</p>");
-                    }
-                } else {
-                    $("#results").html("<p class='text-warning'>No results found.</p>");
-                }
-            }).fail(function() {
-                $("#results").html("<p class='text-danger'>Error fetching data.</p>");
-            });
-        }
 
        function resetForm() {
             $("#songInput").val("");
