@@ -19,7 +19,7 @@
             let song = $("#songInput").val();
             let artist = $("#artistInput").val();
             //https://genius-lyrics.netlify.app/
-            $.get(`https://genius-lyrics.netlify.app/public/search?q=${song}`, function(response) {
+            $.get(`https://genius-lyrics.netlify.app/search?q=${song}`, function(response) {
                 if (response.response.hits.length > 0) {
                     let filteredResult = response.response.hits.find(hit => 
                         hit.result.primary_artist.name.toLowerCase() === artist.toLowerCase()
