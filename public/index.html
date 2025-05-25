@@ -28,6 +28,35 @@
 
     <script>
         function searchGenius() {
+            let song = $("#songInput").val().trim();
+            let artist = $("#artistInput").val().trim();
+
+            if (!song || !artist) {
+                $("#results").html("<p class='text-danger'>Please enter both a song name and an artist.</p>");
+                return;
+            }
+
+            let baseURL = window.location.hostname.includes("localhost") 
+                ? "http://localhost:8888/.netlify/functions/search"
+                : "https://genius-lyrics.netlify.app/.netlify/functions/search";
+
+            $.get(`${baseURL}?q=${song}`, function(response) {
+                if (response.title) {
+                    $("#results").html(`
+                        <div class="card p-3">
+                            <h2>${response.title}</h2>
+                            <p><strong>Artist:</strong> ${response.artist}</p>
+                            <p><a href="${response.url}" class="btn btn-success" target="_blank">View on Genius</a></p>
+                        </div>
+                    `);
+                } else {
+                    $("#results").html("<p class='text-danger'>No matching song found.</p>");
+                }
+            }).fail(function() {
+                $("#results").html("<p class='text-danger'>Error fetching data.</p>");
+            });
+        }
+
             let song = $("#songInput").val();
             let artist = $("#artistInput").val();
             if (!song || !artist) {
