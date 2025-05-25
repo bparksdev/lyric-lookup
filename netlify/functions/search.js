@@ -1,6 +1,6 @@
 export async function handler(event) {
     const GENIUS_API_URL = "https://api.genius.com/search";
-    const GENIUS_ACCESS_TOKEN = "YOUR_ACCESS_TOKEN"; // Replace with actual token
+    const GENIUS_ACCESS_TOKEN = "UpinrTmjF6UUTmbxJoFrKKqxT_MNoTr-Fj5eK6-UYRp9-jFaVwHK3N1U-GOD_osn"; // Replace with actual token
 
     try {
         const query = event.queryStringParameters.q;
