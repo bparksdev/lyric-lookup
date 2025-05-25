@@ -41,12 +41,18 @@
                 : "https://genius-lyrics.netlify.app/.netlify/functions/search";
 
             $.get(`${baseURL}?q=${song}`, function(response) {
-                if (response.title) {
+                //response2 = JSON.stringify(response, null, 2);
+                let jsonResponse = JSON.parse(response)
+                let title = jsonResponse?.title;
+                let artist = jsonResponse?.artist;
+                let url = jsonResponse?.url;                
+                console.log(jsonResponse)
+                if (title && artist) {
                     $("#results").html(`
                         <div class="card p-3">
-                            <h2>${response.title}</h2>
-                            <p><strong>Artist:</strong> ${response.artist}</p>
-                            <p><a href="${response.url}" class="btn btn-success" target="_blank">View on Genius</a></p>
+                            <h2>${title}</h2>
+                            <p><strong>Artist:</strong> ${artist}</p>
+                            <p><a href="${url}" class="btn btn-success" target="_blank">View on Genius</a></p>
                         </div>
                     `);
                 } else {

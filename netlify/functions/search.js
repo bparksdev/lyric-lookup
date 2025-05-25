@@ -23,6 +23,7 @@ export async function handler(event) {
         if (firstResult) {
             return {
                 statusCode: 200,
+                headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     title: firstResult.full_title,
                     artist: firstResult.primary_artist.name,
