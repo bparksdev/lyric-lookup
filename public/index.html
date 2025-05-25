@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Genius Lyrics Search</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>Genius Lyrics Search</h1>
+    <input type="text" id="songInput" placeholder="Enter song name">
+    BY
+    <input type="text" id="artistInput" placeholder="Enter artist name">
+    <button onclick="searchGenius()">Search</button>
+    <div id="results"></div>
+
+    <script>
+        function searchGenius() {
+            let song = $("#songInput").val();
+            let artist = $("#artistInput").val();
+            
+            $.get(`http://localhost:3000/search?q=${song}`, function(response) {
+                if (response.response.hits.length > 0) {
+                    let filteredResult = response.response.hits.find(hit => 
+                        hit.result.primary_artist.name.toLowerCase() === artist.toLowerCase()
+                    );
+
+                    if (filteredResult) {
+                        $("#results").html(`
+                            <h2>${filteredResult.result.full_title}</h2>
+                            <p><strong>Artist:</strong> ${filteredResult.result.primary_artist.name}</p>
+                            <p><a href="${filteredResult.result.url}" target="_blank">View on Genius</a></p>
+                        `);
+                    } else {
+                        $("#results").html("<p>No matching song found for the specified artist.</p>");
+                    }
+                } else {
+                    $("#results").html("<p>No results found.</p>");
+                }
+            }).fail(function() {
+                $("#results").html("<p>Error fetching data.</p>");
+            });
+        }
+    </script>
+</body>
+</html>
