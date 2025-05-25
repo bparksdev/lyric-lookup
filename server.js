@@ -5,7 +5,7 @@ import cors from "cors";
 const app = express();
 app.use(cors());
 app.use(express.static("public")); // Serve static files from the "public" folder
-
+//https://genius-lyrics.netlify.app/
 const GENIUS_API_URL = "https://api.genius.com/search";
 const GENIUS_ACCESS_TOKEN = "UpinrTmjF6UUTmbxJoFrKKqxT_MNoTr-Fj5eK6-UYRp9-jFaVwHK3N1U-GOD_osn"; // Replace this with your actual Genius API token
 
