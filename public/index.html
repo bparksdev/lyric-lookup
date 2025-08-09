@@ -11,7 +11,8 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body class="container mt-5" style="background-color: black;">
-    <h1 class="text-center mb-4" style="color:blanchedalmond">Genius Lyrics Search</h1>
+    <h1 class="text-center" style="color:blanchedalmond">Genius Lyrics Search</h1>
+    <h3 class="text-center mb-4" style="color:blanchedalmond">Powered By Genius API</h3>
     
     <form onsubmit="searchGenius(); return false;" class="alert alert-success">
         <div class="mb-3">
@@ -64,7 +65,7 @@
 
                         $("#results").html(resultsHTML);
                     } else {
-                        $("#results").html("<p class='text-danger'>No matching songs found.</p>");
+                        $("#results").html("<p class='text-danger'>No matching songs found. Check names and spellings and try again.</p>");
                     }
                 } catch (error) {
                     console.error("Error parsing JSON:", error);
